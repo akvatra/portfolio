@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compétences — Abigail KETTAB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --surface: #fffef8;
+      --border: #1a1a1a;
+      --text: #1a1a1a;
+      --muted: #555550;
+      --accent: #7c3aed;
+      --accent-light: #ede9fe;
+      --accent-hover: #6d28d9;
+      --radius: 12px;
+      --shadow: 4px 4px 0px #1a1a1a;
+      --shadow-hover: 6px 6px 0px #7c3aed;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-attachment: fixed;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 6%;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      box-shadow: 0 3px 0 var(--border);
+    }
+    .nav-logo {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: .3rem .7rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* PAGE */
+    .page {
+      padding: 8rem 6% 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -10%; right: -10%;
+      width: 60vw; height: 60vw;
+      background: radial-gradient(circle, rgba(124,58,237,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* EN-TÊTE */
+    .skills-header {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      background: var(--accent-light);
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      padding: .2rem .9rem;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      letter-spacing: -.03em;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .skills-header > p {
+      color: var(--muted);
+      max-width: 420px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: .8rem 1.2rem;
+      box-shadow: 3px 3px 0 var(--border);
+    }
+
+    /* LAYOUT CATÉGORIES */
+    .skills-layout {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* BLOC CATÉGORIE */
+    .skill-category {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.4rem;
+      border-bottom: 2px solid var(--border);
+      background: var(--accent-light);
+    }
+
+    .category-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .category-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -.02em;
+      color: var(--accent);
+    }
+
+    /* GRILLE DE COMPÉTENCES DANS UNE CATÉGORIE */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 1px;
+    }
+
+    /* ITEM */
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      padding: 1rem 1.2rem;
+      border-right: 1px solid #e0dbd0;
+      border-bottom: 1px solid #e0dbd0;
+    }
+    .skill-item:last-child,
+    .skill-item:nth-child(4n) { border-right: none; }
+
+    .skill-name {
+      font-family: 'Caveat', cursive;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* BARRE DE NIVEAU */
+    .skill-level {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: transparent;
+      transition: background .2s;
+    }
+    .dot.filled {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .skill-label {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-left: 4px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* SOFT SKILLS — chips sans barre */
+    .soft-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      padding: 1.2rem 1.4rem;
+    }
+
+    .soft-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: .35rem .9rem;
+      box-shadow: 2px 2px 0 var(--border);
+      transition: box-shadow .2s, transform .2s, border-color .2s;
+    }
+    .soft-chip:hover {
+      border-color: var(--accent);
+      box-shadow: 3px 3px 0 var(--accent);
+      transform: translate(-1px, -1px);
+    }
+
+    .soft-chip-icon { font-size: 1rem; }
+
+    /* LANGUES — rendu spécial */
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 1px;
+    }
+
+    .lang-item {
+      padding: 1rem 1.2rem;
+      border-right: 1px solid #e0dbd0;
+      border-bottom: 1px solid #e0dbd0;
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .lang-name {
+      font-family: 'Caveat', cursive;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .lang-badge {
+      display: inline-block;
+      font-size: .75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1.5px solid var(--accent);
+      border-radius: 999px;
+      padding: .05rem .55rem;
+      width: fit-content;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 2px solid var(--border);
+      text-align: center;
+      padding: 2rem 6%;
+      color: var(--muted);
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      background: var(--surface);
+    }
+
+    @media (max-width: 750px) {
+      .nav-links { display: none; }
+      .skills-grid, .lang-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .skills-grid, .lang-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="accueil.html">✦ Abigail KETTAB</a>
+    <ul class="nav-links">
+      <li><a href="competence.html" class="active">Compétences</a></li>
+      <li><a href="experience.html">Expériences</a></li>
+      <li><a href="projet.html">Projets</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <div class="hero-glow"></div>
+
+    <div class="skills-header">
+      <p class="section-label">01 — Compétences</p>
+      <h1>Ce que je sais faire ✦</h1>
+      <p>Du code au design, du travail solo aux projets en équipe — un tour d'horizon de mes compétences techniques et humaines.</p>
+    </div>
+
+    <div class="skills-layout">
+
+      <!-- DÉVELOPPEMENT -->
+      <section class="skill-category">
+        <div class="category-header">
+          <span class="category-icon">💻</span>
+          <span class="category-title">Développement</span>
+        </div>
+        <div class="skills-grid">
+
+          <div class="skill-item">
+            <span class="skill-name">HTML / CSS</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Avancé</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">Responsive design</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Intermédiaire</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">JavaScript</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Avancé</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">Java</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Notions</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">PHP</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Avancé</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">C</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Notions</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">Swift</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Notions</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">Application mobile</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Intermédiaire</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- OUTILS & DESIGN -->
+      <section class="skill-category">
+        <div class="category-header">
+          <span class="category-icon">🎨</span>
+          <span class="category-title">Outils &amp; Design</span>
+        </div>
+        <div class="skills-grid">
+
+          <div class="skill-item">
+            <span class="skill-name">GitHub</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Modéré</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">Canva</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Manœuvrable</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-name">Figma</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Notions</span>
+            </div>
+          </div>
+
+                    <div class="skill-item">
+            <span class="skill-name">Streamlabs</span>
+            <div class="skill-level">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="skill-label">Intermédiaire</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- LANGUES -->
+      <section class="skill-category">
+        <div class="category-header">
+          <span class="category-icon">🌍</span>
+          <span class="category-title">Langues</span>
+        </div>
+        <div class="lang-grid">
+
+          <div class="lang-item">
+            <span class="lang-name">Français</span>
+            <span class="lang-badge">Langue maternelle</span>
+          </div>
+
+          <div class="lang-item">
+            <span class="lang-name">Anglais</span>
+            <span class="lang-badge">Courant - B2</span>
+          </div>
+
+          <div class="lang-item">
+            <span class="lang-name">Espagnol</span>
+            <span class="lang-badge">Notions</span>
+          </div>
+
+          <div class="lang-item">
+            <span class="lang-name">Italien</span>
+            <span class="lang-badge">Notions</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SOFT SKILLS -->
+      <section class="skill-category">
+        <div class="category-header">
+          <span class="category-icon">🤝</span>
+          <span class="category-title">Savoir-être</span>
+        </div>
+        <div class="soft-grid">
+          <span class="soft-chip"><span class="soft-chip-icon">🚀</span> Prise d'initiative</span>
+          <span class="soft-chip"><span class="soft-chip-icon">🗣️</span> Communication</span>
+          <span class="soft-chip"><span class="soft-chip-icon">👥</span> Travail en équipe</span>
+          <span class="soft-chip"><span class="soft-chip-icon">📋</span> Organisation</span>
+          <span class="soft-chip"><span class="soft-chip-icon">🔀</span> Gestion de projet</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Abigail KETTAB — Fait avec soin ✦</p>
+  </footer>
+
+</body>
+</html>
