@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projets — Abigail KETTAB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --surface: #fffef8;
+      --border: #1a1a1a;
+      --text: #1a1a1a;
+      --muted: #555550;
+      --accent: #7c3aed;
+      --accent-light: #ede9fe;
+      --accent-hover: #6d28d9;
+      --radius: 12px;
+      --shadow: 4px 4px 0px #1a1a1a;
+      --shadow-hover: 6px 6px 0px #7c3aed;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-attachment: fixed;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 6%;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      box-shadow: 0 3px 0 var(--border);
+    }
+    .nav-logo {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: .01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: .3rem .7rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* PAGE */
+    .page {
+      min-height: 100vh;
+      padding: 8rem 6% 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -10%; right: -10%;
+      width: 60vw; height: 60vw;
+      background: radial-gradient(circle, rgba(124,58,237,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* HEADER SECTION */
+    .projects-header {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      background: var(--accent-light);
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      padding: .2rem .9rem;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      letter-spacing: -.03em;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .projects-header > p {
+      color: var(--muted);
+      max-width: 420px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: .8rem 1.2rem;
+      box-shadow: 3px 3px 0 var(--border);
+    }
+
+    /* GRILLE PROJETS */
+    .projects-grid {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* CARD */
+    .project-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .2s, transform .2s, border-color .2s;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+      transform: translate(-1px, -1px);
+    }
+
+    /* visuel placeholder de la carte */
+    .card-thumbnail {
+      width: 100%;
+      aspect-ratio: 16 / 8;
+      background: var(--accent-light);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      user-select: none;
+    }
+
+    .card-body {
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      flex: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -.02em;
+      line-height: 1.2;
+    }
+
+    .card-year {
+      font-family: 'Caveat', cursive;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      padding: .1rem .7rem;
+      white-space: nowrap;
+    }
+
+    .card-desc {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
+    /* TAGS */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+    .tag {
+      font-family: 'Caveat', cursive;
+      font-size: .85rem;
+      font-weight: 700;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      padding: .05rem .55rem;
+      color: var(--text);
+    }
+
+    /* FOOTER DE CARTE — liens */
+    .card-footer {
+      padding: .9rem 1.4rem;
+      border-top: 2px solid var(--border);
+      display: flex;
+      gap: .8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      text-decoration: none;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: .35rem .9rem;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      box-shadow: 2px 2px 0 var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .15s;
+    }
+    .btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 3px 3px 0 var(--accent-hover);
+      transform: translate(-1px, -1px);
+    }
+    .btn-ghost {
+      background: transparent;
+      box-shadow: none;
+    }
+    .btn-ghost:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 2px 2px 0 var(--accent);
+    }
+
+    /* FOOTER PAGE */
+    footer {
+      border-top: 2px solid var(--border);
+      text-align: center;
+      padding: 2rem 6%;
+      color: var(--muted);
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      background: var(--surface);
+    }
+
+    @media (max-width: 750px) {
+      .nav-links { display: none; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a class="nav-logo" href="accueil.html">✦ Abigail KETTAB</a>
+    <ul class="nav-links">
+      <li><a href="competence.html">Compétences</a></li>
+      <li><a href="experience.html">Expériences</a></li>
+      <li><a href="projet.html" class="active">Projets</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <div class="hero-glow"></div>
+
+    <!-- EN-TÊTE -->
+    <div class="projects-header">
+      <p class="section-label">03 — Projets</p>
+      <h1>Mes réalisations ✦</h1>
+      <p>Une sélection de projets perso, académiques ou exploratoires. Le code est souvent sur GitHub — n'hésitez pas à y jeter un œil.</p>
+    </div>
+
+    <!-- GRILLE -->
+    <div class="projects-grid">
+
+      <!-- CARTE 1 -->
+      <article class="project-card">
+        <div class="card-thumbnail">🖥️</div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h2 class="card-title">Projet Quelix</h2>
+            <span class="card-year">2026</span>
+          </div>
+          <p class="project-desc">
+            Nous avons eu une projet à faire, le but étant de créer une API et de la connecter à un frontend par la suite. Ce projet devait être réalisé en groupe de 3 ou 4 mais avec mon partenaire nous nous sommes retrouvés à deux. Par conséquent nous avions plus de tâches à réaliser. 
+          </p>
+          <div class="card-tags">
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">API</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Travail d'équipe</span>
+            <span class="tag">Postman</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/Axxel-L/SAE_Application_Quelix" target="_blank" class="btn">
+            🐙 GitHub
+          </a>
+        </div>
+      </article>
+
+      <!-- CARTE 2 -->
+      <article class="project-card">
+        <div class="card-thumbnail">🎨</div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h2 class="card-title">Projeit peinture 3D</h2>
+            <span class="card-year">2026</span>
+          </div>
+          <p class="project-desc">
+            Ce projet était quelque peu intéressant, nous devions choisir une peinture et la reproduire en 3D et faire en sorte que le fichier fasse maximum 3Mo de taille. C'était un challenge très divertissent et intéressant.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Javascript</span>
+            <span class="tag">Paint</span>
+            <span class="tag">3D</span>
+          </div>
+        </div>
+        <div class="card-footer">
+            <p>La peinture a été déposé sur le github de mon professeur, impossible de le récupérer.</p>
+        </div>
+    </article>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Abigail KETTAB — Fait avec soin ✦</p>
+  </footer>
+
+</body>
+</html>
