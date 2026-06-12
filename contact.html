@@ -4,17 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact — Abigail KETTAB</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #0e0e0e;
-      --surface: #161616;
-      --border: #2a2a2a;
-      --text: #e8e8e0;
-      --muted: #888880;
-      --accent: #c084fc;
-      --accent2: #a78bfa;
+      --bg: #f5f0e8;
+      --surface: #fffef8;
+      --border: #1a1a1a;
+      --text: #1a1a1a;
+      --muted: #555550;
+      --accent: #7c3aed;
+      --accent-light: #ede9fe;
+      --accent-hover: #6d28d9;
       --radius: 12px;
+      --shadow: 4px 4px 0px #1a1a1a;
+      --shadow-hover: 6px 6px 0px #7c3aed;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,10 +27,13 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
       font-size: 1.05rem;
       overflow-x: hidden;
+      background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-attachment: fixed;
     }
 
     /* NAV */
@@ -38,29 +44,36 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 6%;
-      background: rgba(14,14,14,.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
+      padding: 1rem 6%;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      box-shadow: 0 3px 0 var(--border);
     }
     .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.2rem;
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 1.5rem;
       color: var(--accent);
-      letter-spacing: -.02em;
       text-decoration: none;
+      letter-spacing: .01em;
     }
-    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      color: var(--muted);
+      color: var(--text);
       text-decoration: none;
-      font-size: .9rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      transition: color .2s;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: .3rem .7rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: color .2s, border-color .2s, background .2s;
     }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
 
     /* PAGE */
     .page {
@@ -68,49 +81,47 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8rem 6% 4rem;
+      padding: 8rem 6% 6rem;
       position: relative;
       overflow: hidden;
     }
 
-    .hero-grid-bg {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: .35;
-    }
+    /* fond grille remplacé par le pointillé du body, on garde juste le glow */
+    .hero-grid-bg { display: none; }
 
     .hero-glow {
       position: absolute;
       top: -10%; right: -10%;
       width: 60vw; height: 60vw;
-      background: radial-gradient(circle, rgba(192,132,252,.10) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(124,58,237,.08) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .contact-wrapper {
       position: relative;
       width: 100%;
-      max-width: 960px;
+      max-width: 500px;
       display: grid;
       grid-template-columns: 1fr;
-      max-width: 500px;
-      gap: 4rem;
+      gap: 2rem;
       align-items: start;
     }
 
-    /* INFOS GAUCHE */
+    /* LABEL */
     .contact-info .section-label {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 1rem;
-      font-size: .8rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
+      gap: .7rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .1em;
       color: var(--accent);
       margin-bottom: 1rem;
+      background: var(--accent-light);
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      padding: .2rem .9rem;
     }
 
     h1 {
@@ -122,12 +133,18 @@
       margin-bottom: 1.2rem;
     }
 
-    .contact-info p {
+    .contact-info > p {
       color: var(--muted);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       max-width: 340px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: .8rem 1.2rem;
+      box-shadow: 3px 3px 0 var(--border);
     }
 
+    /* CONTACT ITEMS */
     .contact-items {
       display: flex;
       flex-direction: column;
@@ -140,13 +157,18 @@
       gap: 1rem;
       padding: 1rem 1.2rem;
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       border-radius: var(--radius);
       text-decoration: none;
       color: var(--text);
-      transition: border-color .25s, transform .25s;
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s, transform .2s, border-color .2s;
     }
-    .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+    .contact-item:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+      transform: translate(-1px, -1px);
+    }
 
     .contact-item-icon {
       font-size: 1.3rem;
@@ -156,107 +178,32 @@
     }
 
     .contact-item-label {
-      font-size: .75rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--accent2);
+      font-family: 'Caveat', cursive;
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--accent);
       margin-bottom: .1rem;
     }
 
     .contact-item-value {
-      font-size: .95rem;
-    }
-
-    /* FORMULAIRE DROITE */
-    .contact-form {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.4rem;
-    }
-
-    .form-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: .3rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-    }
-
-    label {
-      font-size: .8rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+      font-size: .9rem;
       color: var(--muted);
     }
-
-    input, textarea, select {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .95rem;
-      font-weight: 300;
-      padding: .85rem 1rem;
-      outline: none;
-      transition: border-color .2s;
-      width: 100%;
-      resize: none;
-    }
-    input::placeholder, textarea::placeholder { color: var(--muted); }
-    input:focus, textarea:focus, select:focus { border-color: var(--accent); }
-
-    textarea { min-height: 130px; }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .btn {
-      padding: .95rem 2rem;
-      border-radius: 999px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: .95rem;
-      letter-spacing: .04em;
-      cursor: pointer;
-      border: none;
-      transition: transform .2s, box-shadow .2s;
-      width: 100%;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary {
-      background: var(--accent);
-      color: #0e0e0e;
-      box-shadow: 0 0 30px rgba(192,132,252,.3);
-    }
-    .btn-primary:hover { box-shadow: 0 0 50px rgba(192,132,252,.55); }
 
     /* FOOTER */
     footer {
-      border-top: 1px solid var(--border);
+      border-top: 2px solid var(--border);
       text-align: center;
       padding: 2rem 6%;
       color: var(--muted);
-      font-size: .85rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      background: var(--surface);
     }
 
-    /* RESPONSIVE */
     @media (max-width: 750px) {
       .nav-links { display: none; }
-      .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
-      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -264,7 +211,7 @@
 
   <!-- NAVIGATION -->
   <nav>
-    <a class="nav-logo" href="accueil.html">Abigail KETTAB</a>
+    <a class="nav-logo" href="accueil.html">✦ Abigail KETTAB</a>
     <ul class="nav-links">
       <li><a href="competence.html">Compétences</a></li>
       <li><a href="experience.html">Expériences</a></li>
@@ -286,8 +233,6 @@
         <p>Vous avez une question, une opportunité ou juste envie d'échanger ? Je suis disponible directement par ces canaux.</p>
 
         <div class="contact-items">
-
-          <!-- ✏️ Remplace les valeurs par les tiennes -->
 
           <a href="mailto:abigail.kettabcoe2006@gmail.com" class="contact-item">
             <span class="contact-item-icon">✉️</span>
@@ -323,7 +268,6 @@
 
         </div>
       </div>
-      
 
     </div>
   </div>
