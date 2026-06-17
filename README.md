@@ -1,7 +1,7 @@
 # Portfolio - KETTAB
 _différentes informations sur le projet_
 
-[![forthebadge](https://forthebadge.com/badges/made-with-markdown.svg)](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/badges/powered-by-energy-drinks.svg)](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/badges/uses-html.svg)](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/badges/uses-css.svg)](http://forthebadge.com)
+[![forthebadge](https://forthebadge.com/badges/powered-by-energy-drinks.svg)](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/badges/uses-html.svg)](http://forthebadge.com)  [![forthebadge](https://forthebadge.com/badges/uses-css.svg)](http://forthebadge.com)
 
 C'est un projet qui sera utile à l'avenir, puisque je souhaite faire du développement de site internet. Il illustre qui je suis, mes expériences ainsi que mes compétences.
 
